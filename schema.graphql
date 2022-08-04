@@ -1,0 +1,69 @@
+
+
+type Customer {
+  id: Int! @readonly
+  associationMembership: String
+  commercialRegId: Int
+  companyIndex: String
+  correspondenceLanguageEnumId: String
+  dynamicSegment: String
+  entFlag: String
+  fineSegment: String
+  mainAddressId: String
+  mainSegment: String
+  mrkvUuid: String
+  name: String 
+  name_uppercase: String @alias(property: "name") @uppercase
+  bankAccountCount: Int @cypher(
+        statement: """
+        MATCH (this)-[:HAS_BANK_DETAILS]->(x)
+        RETURN COUNT(x)
+        """)
+  parentId: String
+  phone: String
+  salesAreaEnumId: String
+  stateEnumId: String
+  subfineSegment: String
+  symCmaId: String
+  sKey: String
+  turnover: String
+  typeEnumId: String
+  uuid: String
+  vasBarred: String
+  vasEnabled: String
+  websiteUrl: String
+  category: String
+  corporateEmail: String
+  fax: String
+  hasOpportunities: String
+  languageEnumId: String
+  personalUsageActiveYear: String
+  personalUsageMonthly: String
+  postAccountNumber: String
+  type: String
+  vatNumber: String 
+  hasBankDetailsBank: Bank @relationship(type: "HAS_BANK_DETAILS", direction: OUT)
+}
+
+type Bank {
+  id: Int!
+  bankAccountNumber: String
+  bankCity: String @default(value: "City Unknown")
+  bankIban: String
+  bankZipCode: String
+}
+
+extend type Bank @auth(
+    rules: [
+        { operations: [READ], roles: ["reader:bank"] }
+    ]
+)
+
+extend type Customer @auth(
+    rules: [
+        {
+            operations: [READ],
+            allow: { id: "$jwt.sub" }
+        }
+    ]
+)

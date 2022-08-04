@@ -1,0 +1,20 @@
+{
+  "name": "graphql-api-rbac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/utils": "^8.6.10",
+    "@neo4j/graphql": "^3.2.3",
+    "@neo4j/graphql-plugin-auth": "^1.0.0",
+    "apollo-server": "^3.7.0",
+    "graphql": "^16.5.0",
+    "neo4j-driver": "^4.4.5"
+  }
+}

@@ -1,0 +1,1 @@
+DENY READ {phone} ON GRAPH neo4j NODE Customer TO reader2;
